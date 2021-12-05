@@ -1,12 +1,14 @@
-# syntax=docker/dockerfile:1
-FROM golang:alpine
+FROM golang:latest
 
-ENV GO111MODULE=on
-ENV API_PORT=8080
-ENV EXPORT_FILE_PATH=/./output
-ENV RECORD_FREQ=10
-WORKDIR /app
-COPY . ./
-RUN go build -o /in-store
+RUN mkdir /build
+WORKDIR /build
 
-CMD [ "/in-store" ]
+RUN export GO111MODULE=on 
+RUN go get github.com/aydinsercan/GolangRestApi/main
+RUN cd /build && git clone https://github.com/aydinsercan/GolangRestApi.git
+
+RUN cd /build/GolangRestApi/main && go build
+
+EXPOSE 8888
+
+ENTRYPOINT [ "/build/GolangRestApi/main" ]
