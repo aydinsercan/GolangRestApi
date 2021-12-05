@@ -1,14 +1,11 @@
-FROM golang:latest
 
-RUN mkdir /build
-WORKDIR /build
+FROM golang:alpine
 
-RUN export GO111MODULE=on 
-RUN go get github.com/aydinsercan/GolangRestApi/main
-RUN cd /build && git clone https://github.com/aydinsercan/GolangRestApi.git
+ENV GO111MODULE=on
+ENV API_PORT=8888
 
-RUN cd /build/GolangRestApi/main && go build
+WORKDIR /app
+COPY . ./
+RUN go build -o /go-api
 
-EXPOSE 8888
-
-ENTRYPOINT [ "/build/GolangRestApi/main" ]
+CMD [ "/go-api" ]

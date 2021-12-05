@@ -11,8 +11,8 @@ go run main.go
 ```
 Docker Container
 ```shell
-docker build -t golangrestapi .
-docker run -p 8888:8888 golangrestapi 
+docker build -t go-api .
+docker run -p 8888:8888 go-api
 ```
 
 Now, you can send requests to the application via postman according to the following endpoints
