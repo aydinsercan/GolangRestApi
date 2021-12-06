@@ -8,7 +8,10 @@ import (
 	store "go-api/store"
 )
 
+//Creating Db
 var db = store.New()
+
+//Handler methods and struct
 
 type GetHandler struct{}
 

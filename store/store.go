@@ -21,7 +21,7 @@ func New() Store {
 	fileoperations.LoadKeys(&db)
 
 	defer func() {
-		go tempTimer(store)
+		go Timer(store)
 	}()
 
 	return store
@@ -50,7 +50,8 @@ func (k Store) Flush() {
 	}
 }
 
-func tempTimer(store Store) {
+//Save result to the file at a specified interval (every 5 seconds)
+func Timer(store Store) {
 	ticker := time.NewTicker(5 * time.Second)
 	for range ticker.C {
 		log.Println("")
